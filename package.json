@@ -1,6 +1,6 @@
 {
   "name": "ssh-mailgun-2fa",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Email-based two-factor authentication for SSH, using mailgun.",
   "main": "verify.js",
   "scripts": {

@@ -11,6 +11,8 @@ try {
 
 class Verify {
     constructor(config = {}) {
+        this.sigInit();
+
         this.config = Object.assign({
             mailgun: {
                 apiKey: '',
@@ -58,6 +60,14 @@ class Verify {
             console.error('WARNING: Mailgun module failed to initialize');
             process.exit(0);
         }
+    }
+
+    sigInit() {
+        this.handleExit = () => {
+            process.exit(1);
+        };
+        process.on('SIGINT', this.handleExit);
+        process.on('SIGTERM', this.handleExit);
     }
 
     getCode() {
@@ -123,6 +133,12 @@ class Verify {
 
             this.sendEmail(message).then(() => {
                 let prompt = readline.createInterface({input: process.stdin, output: process.stdout});
+
+                // Handle signals to prevent circumvention
+                prompt.on('SIGCONT', this.handleExit);
+                prompt.on('SIGINT', this.handleExit);
+                prompt.on('SIGSTP', this.handleExit);
+                prompt.on('close', this.handleExit);
 
                 prompt.question(this.config.promptText, (userCode) => {
                     if(userCode == code.toString()) {
