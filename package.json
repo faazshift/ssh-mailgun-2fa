@@ -1,0 +1,14 @@
+{
+  "name": "ssh-mailgun-2fa",
+  "version": "0.0.1",
+  "description": "Email-based two-factor authentication for SSH, using mailgun.",
+  "main": "verify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brendan Warkentin <faazshift@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mailgun-js": "^0.10.1"
+  }
+}
